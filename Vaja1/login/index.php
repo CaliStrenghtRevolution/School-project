@@ -89,7 +89,7 @@
         session_start();
         $error = "";
 
-        if(isset($_SESSION["Name"]))
+        if(isset($_SESSION["Authority"]))
         {
             if(!isset($_SERVER['POST']['redirected']))
             {
@@ -109,7 +109,8 @@
 
     <div class="container">
         <h1>Log in to School Bridge</h1>
-        <form action = "signup.php" method = "post">
+        <form action = "login.php" method = "post">
+
             <label for="Username">Username:</label>
             <input type="text" id="Username" name="Username" required>
 

@@ -1,4 +1,9 @@
-<!DOCTYPE html>
+<?php
+    include("config.php");
+    session_start();
+    $error = "";
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -49,10 +54,29 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Subject</a>
+        <a href="../home/">Home</a>
+            <?php
+                if(isset($_SESSION["Authority"])) 
+                {
+                    if($_SESSION["Authority"] == 3) 
+                    {
+                        echo '<a href="../students/">Students</a>';
+                        echo '<a href="../subjects/">Subjects</a>';
+                        echo '<a href="../professors/">Professors</a>';
+                    }
+                }
+            ?>
         <div class="navbar-right">
-            <a href="../login/">Login</a>
+            <?php  
+                if(!isset($_SESSION["Authority"])) 
+                {
+                    echo '<a href="../login/">Login</a>';
+                }
+                else
+                {
+                    echo '<a href="../login/logout.php">Logout</a>';
+                }
+            ?>
         </div>
     </div>
 
