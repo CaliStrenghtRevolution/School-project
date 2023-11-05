@@ -27,6 +27,7 @@
             $_SESSION["Username"] = $user['username'];
             $_SESSION["Year"] = $user['year'];
             $_SESSION["Path"] = $user['path'];
+            $_SESSION["id"] = $user['id'];
             $db -> close();
         }
         else
@@ -51,6 +52,7 @@
                 $_SESSION["Name"] = $user['name'];
                 $_SESSION["Surname"] = $user['surname'];
                 $_SESSION["Username"] = $user['username'];
+                $_SESSION["id"] = $user['id'];
                 $_SESSION["Year"] = Null;
                 $_SESSION["Path"] = Null;
                 $db -> close();

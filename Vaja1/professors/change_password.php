@@ -3,19 +3,19 @@
     session_start();
     $error = "";
 
-    if (isset($_POST["delete_id"]) && !empty($_POST["delete_id"])) {
-        $delete_id = $_POST["delete_id"];      
-        $sql = "DELETE FROM student WHERE id = ?";     
+    if (isset($_POST["change_id"]) && !empty($_POST["change_id"])) {
+        $change_id = $_POST["change_id"];
+        $change = sha1($_POST["change"]);
+        $sql = "UPDATE professor SET password = ? WHERE id = ?";
         $db = mysqli_connect(Localhost, Username, Password, Name);
         if (!$db) {
             die("Connection error: " . mysqli_connect_error());
-        }    
+        }
         $stmt = $db->prepare($sql);
-        $stmt->bind_param("s", $delete_id);
-        if ($stmt->execute()) {
-
-        } else {
-
+        $stmt->bind_param("ss", $change, $change_id);
+        if ($stmt->execute())
+        {
+            
         }
         $stmt->close();
         $db->close();
@@ -31,6 +31,6 @@
     }
 
     $uri .= $_SERVER['HTTP_HOST'];
-    header('Location: '.$uri.'/Vaja1/students/');
+    header('Location: '.$uri.'/Vaja1/professors/');
     exit;
 ?>

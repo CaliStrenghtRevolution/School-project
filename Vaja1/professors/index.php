@@ -138,18 +138,16 @@
 
     <div class="container">
         <h1>Students</h1>
-        <p>This table shows every student attending SchoolBridge. As the Administrator, you can add new students, or remove previous ones. You can also change any student's password.</p>
+        <p>This table shows every professor of SchoolBridge. As the Administrator, you can add new professors, or remove previous ones. You can also change any professor's password.</p>
         <table class="tableAdmin">
             <tr>
                 <th class="columnAdmin">Name</th>
                 <th class="columnAdmin">Surname</th>
-                <th class="columnAdmin">Path</th>
-                <th class="columnAdmin">Year</th>
                 <th class="columnAdmin">Username</th>
                 <th class="columnAdmin">ID</th>
             </tr>
             <?php
-                    $sql = "SELECT * FROM student ORDER BY id DESC";
+                    $sql = "SELECT * FROM professor ORDER BY id DESC";
                     $result = $db->query($sql);
 
                     if($result->num_rows > 0)
@@ -160,8 +158,6 @@
             <tr>
                 <td class="columnAdmin"><?php echo $row['name'] ?></td>
                 <td class="columnAdmin"><?php echo $row['surname'] ?></td>
-                <td class="columnAdmin"><?php echo $row['path'] ?></td>
-                <td class="columnAdmin"><?php echo $row['year'] ?></td>
                 <td class="columnAdmin"><?php echo $row['username'] ?></td>
                 <td class="columnAdmin"><?php echo $row['id'] ?></td>
             </tr>
@@ -176,7 +172,7 @@
                 <label for="delete_id">ID:</label>
                 <input class="inputDEL" type="text" id="delete_id" name="delete_id" required>
 
-                <button type="submit">Delete Student</button>
+                <button type="submit">Delete Professor</button>
             </form>
             <form class="delete" action = "change_password.php" method = "post">
 
@@ -186,12 +182,12 @@
                 <label for="change">New password:</label>
                 <input class="inputDEL" type="password" id="change" name="change" required>
 
-                <button type="submit">Update Student's Password</button>
+                <button type="submit">Update Professor's Password</button>
             </form>
         </div>
         <hr>
         <br>
-        <p style="text-align: center;">Here you can add a new student to the system.</p>
+        <p style="text-align: center;">Here you can add a new professor to the system.</p>
         <div class="containerADD">
             <form action = "add.php" method = "post">
 
@@ -204,30 +200,10 @@
                 <label for="Username">Username:</label>
                 <input class="input" type="text" id="Username" name="Username" required>
 
-                <div class="ADDgrid">
-                    <div>
-                        <label for="Path">Path:</label>
-                        <select class="input" id="Path" name="Path" required>
-                            <option value="Racunalnicar">Računalničar</option>
-                            <option value="Kemik">Kemik</option>
-                            <option value="Elektrotehnik">Elektrotehnik</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label for="Path">Year:</label>
-                        <select class="input" id="Year" name="Year" required>
-                            <option value="1">1</option>
-                            <option value="2">2</option>
-                            <option value="3">3</option>
-                            <option value="4">4</option>
-                        </select>
-                    </div>
-                </div>
-
                 <label for="Password">Password:</label>
                 <input class="input" type="password" id="Password" name="Password" required>
 
-                <button type="submit">Create Student</button>
+                <button type="submit">Create Professor</button>
             </form>
         </div>
     </div>

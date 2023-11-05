@@ -1,12 +1,12 @@
 <?php
     session_start();
     $_SESSION["Authority"] = Null;
-    $_SESSION["Authority"] = Null;
     $_SESSION["Name"] = Null;
     $_SESSION["Surname"] = Null;
     $_SESSION["Username"] = Null;
     $_SESSION["Year"] = Null;
     $_SESSION["Path"] = Null;
+    $_SESSION["id"] = Null;
 
     if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS']))
     {

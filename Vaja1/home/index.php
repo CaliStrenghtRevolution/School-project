@@ -71,9 +71,11 @@
                 if(!isset($_SESSION["Authority"])) 
                 {
                     echo '<a href="../login/">Login</a>';
+                    echo '<a href="../signup/">Sign Up</a>';
                 }
                 else
                 {
+                    echo '<a href="../profile/">'.$_SESSION["Name"].' '.$_SESSION["Surname"].'</a>';
                     echo '<a href="../login/logout.php">Logout</a>';
                 }
             ?>
@@ -83,7 +85,9 @@
     <div class="container">
         <h1>Welcome to SchoolBridge</h1>
         <p>Your gateway to seamless education.</p>
-        <!-- Your content goes here -->
+        <hr>
+        <h3 style="color: #007acc; text-align: center;">Don't have an account yet? Sign up today and make bridges to connect to your school work and professors!</h3>
+        <hr>
     </div>
 </body>
 </html>

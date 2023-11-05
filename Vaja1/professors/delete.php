@@ -5,7 +5,7 @@
 
     if (isset($_POST["delete_id"]) && !empty($_POST["delete_id"])) {
         $delete_id = $_POST["delete_id"];      
-        $sql = "DELETE FROM student WHERE id = ?";     
+        $sql = "DELETE FROM professor WHERE id = ?";     
         $db = mysqli_connect(Localhost, Username, Password, Name);
         if (!$db) {
             die("Connection error: " . mysqli_connect_error());
@@ -31,6 +31,6 @@
     }
 
     $uri .= $_SERVER['HTTP_HOST'];
-    header('Location: '.$uri.'/Vaja1/students/');
+    header('Location: '.$uri.'/Vaja1/professors/');
     exit;
 ?>
