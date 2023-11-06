@@ -2,7 +2,7 @@
     define('Localhost','localhost');
     define('Username','Endles');
     define('Password','MannrobicsMann');
-    define('Name','endles');
+    define('Name','Vaja1');
 
     $db = mysqli_connect(Localhost,Username,Password,Name);
 

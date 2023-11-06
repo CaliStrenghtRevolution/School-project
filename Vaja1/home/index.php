@@ -1,8 +1,11 @@
-<!DOCTYPE html>
+<?php
+    include("config.php");
+    session_start();
+    $error = "";
+?>
+
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SchoolBridge</title>
     <style>
         body {
@@ -49,17 +52,42 @@
 </head>
 <body>
     <div class="navbar">
-        <a href="#">Home</a>
-        <a href="#">Subject</a>
+        <a href="../home/">Home</a>
+            <?php
+                if(isset($_SESSION["Authority"])) 
+                {
+                    if($_SESSION["Authority"] == 3) 
+                    {
+                        echo '<a href="../students/">Students</a>';
+                        echo '<a href="../subjects/">Subjects</a>';
+                        echo '<a href="../professors/">Professors</a>';
+                        echo '<a href="../ps/">PS</a>';
+                        echo '<a href="../ss/">SS</a>';
+                    }
+                }
+            ?>
         <div class="navbar-right">
-            <a href="../login/">Login</a>
+            <?php  
+                if(!isset($_SESSION["Authority"])) 
+                {
+                    echo '<a href="../login/">Login</a>';
+                    echo '<a href="../signup/">Sign Up</a>';
+                }
+                else
+                {
+                    echo '<a href="../profile/">'.$_SESSION["Name"].' '.$_SESSION["Surname"].'</a>';
+                    echo '<a href="../login/logout.php">Logout</a>';
+                }
+            ?>
         </div>
     </div>
 
     <div class="container">
         <h1>Welcome to SchoolBridge</h1>
         <p>Your gateway to seamless education.</p>
-        <!-- Your content goes here -->
+        <hr>
+        <h3 style="color: #007acc; text-align: center;">Don't have an account yet? Sign up today and make bridges to connect to your school work and professors!</h3>
+        <hr>
     </div>
 </body>
 </html>
