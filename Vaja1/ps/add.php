@@ -6,29 +6,21 @@
     if($_SERVER["REQUEST_METHOD"] == "POST")
     {
         $db = mysqli_connect(Localhost,Username,Password,Name);
-        $name = $_POST["Name"];
-        $surname = $_POST["Surname"];
-        $username = $_POST["Username"];
-        $password = sha1($_POST["Password"]);
-        $year = $_POST["Year"];
-        $path = $_POST["Path"];
-        $SQL = "SELECT name FROM student WHERE Username = ?";
+        $professor_id = $_POST["Professor"];
+        $subject_id = $_POST["Subject"];
+        $SQL = "SELECT * FROM ps WHERE id_professor = $professor_id AND id_subject = $subject_id";
         $querry = $db -> prepare($SQL);
-        $querry -> bind_param("s",$username);
+        //$querry -> bind_param("ss", $professor_id, $subject_id);
         $querry -> execute();
         $result = $querry -> get_result();
         if(mysqli_num_rows($result) == 0)
         {
             //upon account not existing
-            $SQL = "INSERT INTO student(Name, Surname, Username, Password, Year, Path) VALUES (?, ?, ?, ?, ?, ?)";
+            $SQL = "INSERT INTO ps(id_professor, id_subject) VALUES (?, ?)";
             $querry = $db -> prepare($SQL);
-            $querry -> bind_param("ssssss",$name,$surname,$username,$password,$year,$path);
+            $querry -> bind_param("ss",$professor_id , $subject_id);
             $querry -> execute();
             $db -> close();
-        }
-        else
-        {
-            $_SESSION["Authority"] = Null;
         }
     }
 
@@ -42,6 +34,6 @@
     }
 
     $uri .= $_SERVER['HTTP_HOST'];
-    header('Location: '.$uri.'/Vaja1/students');
+    header('Location: '.$uri.'/Vaja1/ps');
     exit;
 ?>

@@ -10,9 +10,9 @@
         $surname = $_POST["Surname"];
         $username = $_POST["Username"];
         $password = sha1($_POST["Password"]);
-        $SQL = "SELECT name FROM professor WHERE Username = ? OR Name = ?";
+        $SQL = "SELECT username FROM professor WHERE Username = ?";
         $querry = $db -> prepare($SQL);
-        $querry -> bind_param("ss",$username,$name);
+        $querry -> bind_param("s",$username);
         $querry -> execute();
         $result = $querry -> get_result();
         if(mysqli_num_rows($result) == 0)

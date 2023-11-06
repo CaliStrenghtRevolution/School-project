@@ -61,6 +61,8 @@
                         echo '<a href="../students/">Students</a>';
                         echo '<a href="../subjects/">Subjects</a>';
                         echo '<a href="../professors/">Professors</a>';
+                        echo '<a href="../ps/">PS</a>';
+                        echo '<a href="../ss/">SS</a>';
                     }
                 }
             ?>

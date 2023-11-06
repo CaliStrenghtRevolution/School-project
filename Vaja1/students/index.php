@@ -4,9 +4,14 @@
     $error = "";
 ?>
 
-<html lang="en">
 <head>
     <title>SchoolBridge</title>
+    <script>
+        function redirect()
+        {
+            document.getElementById('redirect').submit();
+        }
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -110,6 +115,27 @@
         }
     </style>
 </head>
+    <?php
+        if(isset($_SESSION["Authority"]))
+        {
+            if($_SESSION["Authority"] != "3")
+            {
+                if(!isset($_SERVER['POST']['redirected']))
+                {
+                    header('Location: ../home/index.php');
+                    die();
+                }
+            }
+        }
+        else
+        {
+            if(!isset($_SERVER['POST']['redirected']))
+            {
+                header('Location: ../home/index.php');
+                die();
+            }
+        }
+    ?>
 <body>
     <div class="navbar">
         <a href="../home/">Home</a>
@@ -119,6 +145,8 @@
                     echo '<a href="../students/">Students</a>';
                     echo '<a href="../subjects/">Subjects</a>';
                     echo '<a href="../professors/">Professors</a>';
+                    echo '<a href="../ps/">PS</a>';
+                    echo '<a href="../ss/">SS</a>';
                 }
             ?>
         <div class="navbar-right">
