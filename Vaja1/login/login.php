@@ -1,5 +1,5 @@
 <?php
-    include("config.php");
+    include("../config.php");
     session_start();
     $error = "";
 
@@ -87,6 +87,6 @@
     }
 
     $uri .= $_SERVER['HTTP_HOST'];
-    header('Location: '.$uri.'/Vaja1/home');
+    header('Location: '.$uri.'/Vaja1/home/index.php');
     exit;
 ?>
