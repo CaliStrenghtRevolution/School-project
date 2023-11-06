@@ -7,6 +7,12 @@
 <html lang="en">
 <head>
     <title>SchoolBridge</title>
+    <script>
+        function redirect()
+        {
+            document.getElementById('redirect').submit();
+        }
+    </script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -110,6 +116,27 @@
         }
     </style>
 </head>
+    <?php
+        if(isset($_SESSION["Authority"]))
+        {
+            if($_SESSION["Authority"] != "3")
+            {
+                if(!isset($_SERVER['POST']['redirected']))
+                {
+                    header('Location: ../home/index.php');
+                    die();
+                }
+            }
+        }
+        else
+        {
+            if(!isset($_SERVER['POST']['redirected']))
+            {
+                header('Location: ../home/index.php');
+                die();
+            }
+        }
+    ?>
 <body>
     <div class="navbar">
         <a href="../home/">Home</a>
@@ -119,6 +146,8 @@
                     echo '<a href="../students/">Students</a>';
                     echo '<a href="../subjects/">Subjects</a>';
                     echo '<a href="../professors/">Professors</a>';
+                    echo '<a href="../ps/">PS</a>';
+                    echo '<a href="../ss/">SS</a>';
                 }
             ?>
         <div class="navbar-right">
@@ -137,7 +166,7 @@
     </div>
 
     <div class="container">
-        <h1>Students</h1>
+        <h1>Professors</h1>
         <p>This table shows every professor of SchoolBridge. As the Administrator, you can add new professors, or remove previous ones. You can also change any professor's password.</p>
         <table class="tableAdmin">
             <tr>

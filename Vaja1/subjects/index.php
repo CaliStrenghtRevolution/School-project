@@ -1,9 +1,10 @@
 <?php
-    include("../config.php");
+    include("config.php");
     session_start();
     $error = "";
 ?>
 
+<html lang="en">
 <head>
     <title>SchoolBridge</title>
     <script>
@@ -165,19 +166,17 @@
     </div>
 
     <div class="container">
-        <h1>Students</h1>
-        <p>This table shows every student attending SchoolBridge. As the Administrator, you can add new students, or remove previous ones. You can also change any student's password.</p>
+        <h1>Subjects</h1>
+        <p>This table shows every subject present in SchoolBridge. As the Administrator, you can add new subjects, or remove previous ones.</p>
         <table class="tableAdmin">
             <tr>
                 <th class="columnAdmin">Name</th>
-                <th class="columnAdmin">Surname</th>
                 <th class="columnAdmin">Path</th>
                 <th class="columnAdmin">Year</th>
-                <th class="columnAdmin">Username</th>
                 <th class="columnAdmin">ID</th>
             </tr>
             <?php
-                    $sql = "SELECT * FROM student ORDER BY id DESC";
+                    $sql = "SELECT * FROM subject ORDER BY id DESC";
                     $result = $db->query($sql);
 
                     if($result->num_rows > 0)
@@ -187,10 +186,8 @@
             ?>
             <tr>
                 <td class="columnAdmin"><?php echo $row['name'] ?></td>
-                <td class="columnAdmin"><?php echo $row['surname'] ?></td>
                 <td class="columnAdmin"><?php echo $row['path'] ?></td>
                 <td class="columnAdmin"><?php echo $row['year'] ?></td>
-                <td class="columnAdmin"><?php echo $row['username'] ?></td>
                 <td class="columnAdmin"><?php echo $row['id'] ?></td>
             </tr>
 
@@ -204,33 +201,17 @@
                 <label for="delete_id">ID:</label>
                 <input class="inputDEL" type="text" id="delete_id" name="delete_id" required>
 
-                <button type="submit">Delete Student</button>
-            </form>
-            <form class="delete" action = "change_password.php" method = "post">
-
-                <label for="change_id">ID:</label>
-                <input class="inputDEL" type="text" id="change_id" name="change_id" required>
-
-                <label for="change">New password:</label>
-                <input class="inputDEL" type="password" id="change" name="change" required>
-
-                <button type="submit">Update Student's Password</button>
+                <button type="submit">Delete Subject</button>
             </form>
         </div>
         <hr>
         <br>
-        <p style="text-align: center;">Here you can add a new student to the system.</p>
+        <p style="text-align: center;">Here you can add a new subject to the system.</p>
         <div class="containerADD">
             <form action = "add.php" method = "post">
 
                 <label for="Name">Name:</label>
                 <input class="input" type="text" id="Name" name="Name" required>
-
-                <label for="Surname">Surname:</label>
-                <input class="input" type="text" id="Surname" name="Surname" required>
-
-                <label for="Username">Username:</label>
-                <input class="input" type="text" id="Username" name="Username" required>
 
                 <div class="ADDgrid">
                     <div>
@@ -252,10 +233,7 @@
                     </div>
                 </div>
 
-                <label for="Password">Password:</label>
-                <input class="input" type="password" id="Password" name="Password" required>
-
-                <button type="submit">Create Student</button>
+                <button type="submit">Create Subject</button>
             </form>
         </div>
     </div>

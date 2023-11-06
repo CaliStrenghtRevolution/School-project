@@ -1,72 +1,217 @@
-<!DOCTYPE html>
-<html>
+<?php
+    include("config.php");
+    session_start();
+    $error = "";
+?>
+
+<html lang="en">
 <head>
-<title>SchoolBridge</title>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="stylestest.css">
+    <title>SchoolBridge</title>
+    <script>
+        function redirect()
+        {
+            document.getElementById('redirect').submit();
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .navbar {
+            background-color: #007acc;
+            overflow: hidden;
+        }
+
+        .navbar a {
+            float: left;
+            font-size: 16px;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #005f9e;
+        }
+
+        .navbar-right {
+            float: right;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #007acc;
+        }
+
+        .input {
+            width: 95%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .profileForm {
+            display: grid;
+            grid-template-columns: 33% 33% 33%;
+        }
+
+        .profile {
+            width: 40%;
+            padding: 10px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007acc;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #005f9e;
+        }
+    </style>
 </head>
+    <?php
+        if(isset($_SESSION["Authority"]))
+        {
+
+        }
+        else
+        {
+            if(!isset($_SERVER['POST']['redirected']))
+            {
+                header('Location: ../home/index.php');
+                die();
+            }
+        }
+    ?>
 <body>
+    <div class="navbar">
+        <a href="../home/">Home</a>
+            <?php
+                if(isset($_SESSION["Authority"])) 
+                {
+                    if($_SESSION["Authority"] == 3) 
+                    {
+                        echo '<a href="../students/">Students</a>';
+                        echo '<a href="../subjects/">Subjects</a>';
+                        echo '<a href="../professors/">Professors</a>';
+                        echo '<a href="../ps/">PS</a>';
+                        echo '<a href="../ss/">SS</a>';
+                    }
+                }
+            ?>
+        <div class="navbar-right">
+            <?php  
+                if(!isset($_SESSION["Authority"])) 
+                {
+                    echo '<a href="../login/">Login</a>';
+                    echo '<a href="../signup/">Sign Up</a>';
+                }
+                else
+                {
+                    echo '<a href="../profile/">'.$_SESSION["Name"].' '.$_SESSION["Surname"].'</a>';
+                    echo '<a href="../login/logout.php">Logout</a>';
+                }
+            ?>
+        </div>
+    </div>
 
-<header>
-<div class="logo">
-<img src="images/schoolbridge-logo.png" alt="SchoolBridge Logo">
-</div>
-<nav>
-<a href="#">Home</a>
-<a href="#">About</a>
-<a href="#">Features</a>
-<a href="#">Screenshots</a>
-<a href="#">Download</a>
-</nav>
-</header>
+    <div class="container">
+        <h1><?php echo $_SESSION["Name"].' '.$_SESSION["Surname"]?></h1>
+            <?php
+                if(isset($_SESSION["Authority"])) 
+                {
+                    if($_SESSION["Authority"] == 2) 
+                    {
+                        ?><h1><?php echo $_SESSION["Path"].', year '.$_SESSION["Year"]?></h1><?php
+                    }
+                }
+            ?>
+        <h1><?php echo $_SESSION["Username"]?></h1>
+        <hr>
+        <div class="profileForm">
+            <form action = "name.php" method = "post">
 
-<main>
+                <label for="Name">Name:</label>
+                <input class="profile" type="text" id="Name" name="Name" required>
 
-<section class="banner">
-<img src="images/schoolbridge-banner.jpg" alt="SchoolBridge Banner">
-<a href="https://play.google.com/store/apps/details?id=com.schoolbridge" class="button">Download the App Now!</a>
-</section>
+                <button type="submit">Update Name</button>
+            </form>
 
-<section class="about">
-<h1>About SchoolBridge</h1>
-<p>SchoolBridge is a mobile app that helps students and teachers stay connected and organized. With SchoolBridge, students can easily access their assignments, grades, and other important school information. Teachers can use SchoolBridge to communicate with students, post assignments, and track student progress.</p>
-<a href="#">Learn More</a>
-</section>
+            <form action = "surname.php" method = "post">
 
-<section class="features">
-<h1>Features</h1>
-<ul>
-<li>Access assignments and grades</li>
-<li>Communicate with teachers and classmates</li>
-<li>Track student progress</li>
-<li>And more!</li>
-</ul>
-<a href="#">See All Features</a>
-</section>
+                <label for="Surname">Surname:</label>
+                <input class="profile" type="text" id="Surname" name="Surname" required>
 
-<section class="screenshots">
-<h1>Screenshots</h1>
-<div class="gallery">
-<img src="images/screenshot-1.png" alt="SchoolBridge Screenshot 1">
-<img src="images/screenshot-2.png" alt="SchoolBridge Screenshot 2">
-<img src="images/screenshot-3.png" alt="SchoolBridge Screenshot 3">
-</div>
-<a href="#">View All Screenshots</a>
-</section>
+                <button type="submit">Update Surname</button>
+            </form>
 
-<section class="download">
-<h1>Download SchoolBridge</h1>
-<p>Download the SchoolBridge app today and see how it can help you succeed in school!</p>
-<a href="https://play.google.com/store/apps/details?id=com.schoolbridge" class="button">Download the App Now!</a>
-<img src="images/qr-code.png" alt="SchoolBridge QR Code">
-</section>
+            <form action = "password.php" method = "post">
 
-</main>
+                <label for="Password">Password:</label>
+                <input class="profile" type="password" id="Password" name="Password" required>
 
-<footer>
-<p>Copyright &copy; 2023 SchoolBridge</p>
-</footer>
+                <button type="submit">Update Password</button>
+            </form>
+        </div>
+        <div class="profileForm">
+            <form action = "username.php" method = "post">
 
+                <label for="Username">Username:</label>
+                <input class="profile" type="text" id="Username" name="Username" required>
+
+                <button type="submit">Update Username</button>
+            </form>
+            <?php
+                if(isset($_SESSION["Authority"])) 
+                {
+                    if($_SESSION["Authority"] == 2) 
+                    {
+                        ?><form action = "path.php" method = "post">
+                            <label for="Path">Path:</label>
+                            <select class="profile" id="Path" name="Path" required>
+                                <option value="Racunalnicar">Računalničar</option>
+                                <option value="Kemik">Kemik</option>
+                                <option value="Elektrotehnik">Elektrotehnik</option>
+                            </select>
+                            <button type="submit">Update Path</button>
+                        </form>
+
+                        <form action = "year.php" method = "post">
+                            <label for="Year">Year:</label>
+                            <select class="profile" id="Year" name="Year" required>
+                                <option value="1">1</option>
+                                <option value="2">2</option>
+                                <option value="3">3</option>
+                                <option value="4">4</option>
+                            </select>
+                            <button type="submit">Update Year</button>
+                        </form><?php
+                    }
+                }
+            ?>
+        </div>
+        <hr>
+    </div>
 </body>
 </html>
