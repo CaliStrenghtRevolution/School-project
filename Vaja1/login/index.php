@@ -85,7 +85,7 @@
     </style>
 </head>
     <?php
-        include("../config.php");
+        include("config.php");
         session_start();
         $error = "";
 

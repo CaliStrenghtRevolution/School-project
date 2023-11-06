@@ -1,10 +1,9 @@
 <?php
-    include("../config.php");
+    include("config.php");
     session_start();
     $error = "";
 ?>
 
-<html lang="en">
 <head>
     <title>SchoolBridge</title>
     <script>
@@ -148,6 +147,10 @@
                     echo '<a href="../professors/">Professors</a>';
                     echo '<a href="../ps/">PS</a>';
                     echo '<a href="../ss/">SS</a>';
+                }
+                if($_SESSION["Authority"] == 2) 
+                {
+                    echo '<a href=""';
                 }
             ?>
         <div class="navbar-right">
