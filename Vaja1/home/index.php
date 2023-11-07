@@ -1,5 +1,5 @@
 <?php
-    include("config.php");
+    include("../config.php");
     session_start();
     $error = "";
 ?>
@@ -63,6 +63,15 @@
                         echo '<a href="../professors/">Professors</a>';
                         echo '<a href="../ps/">PS</a>';
                         echo '<a href="../ss/">SS</a>';
+                    }
+                    else
+                    {
+                        echo '<a href="../homelol/">Tasks</a>';
+                    }
+
+                    if($_SESSION["Authority"] == 2) 
+                    {
+                        echo '<a href="../student-subject/">Assign</a>';
                     }
                 }
             ?>

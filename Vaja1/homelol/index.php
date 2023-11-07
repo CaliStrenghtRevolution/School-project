@@ -147,6 +147,15 @@
                         echo '<a href="../ps/">PS</a>';
                         echo '<a href="../ss/">SS</a>';
                     }
+                    else
+                    {
+                        echo '<a href="../homelol/">Tasks</a>';
+                    }
+
+                    if($_SESSION["Authority"] == 2) 
+                    {
+                        echo '<a href="../student-subject/">Assign</a>';
+                    }
                 }
             ?>
         <div class="navbar-right">
@@ -167,7 +176,18 @@
 
     <div class="container">
         <?php
-                $sql = "SELECT * FROM materials ORDER BY id DESC";
+            if(isset($_SESSION["Authority"])) 
+            {
+                if($_SESSION["Authority"] == 1) 
+                {
+                    $sql = "SELECT * FROM materials WHERE id_professor = ".$_SESSION["id"]." ORDER BY id DESC";
+                }
+                else
+                {
+                    $sql = "SELECT * FROM materials ORDER BY id DESC";
+                }
+            }
+
                 $result = $db->query($sql);
             if ($result->num_rows > 0)
             {
@@ -175,7 +195,23 @@
             { 
         ?>
             <div class="file-card">
-                <div class="file-header"><?php echo $row['title']; ?><div style="float: right;"><?php echo $row['id']; ?></div></div>
+            <?php
+                if(isset($_SESSION["Authority"])) 
+                {
+                    if($_SESSION["Authority"] == 1) 
+                    {
+                        ?><form class="file-header" action="../assignments/index.php" method="post" enctype="multipart/form-data">
+                            <input type="hidden" name="variable_to_pass" value="<?php echo $row['id']; ?>">   
+                            <button style="background-color: #ccc; color: black;"><?php echo $row['title']; ?></button>
+                            <div style="float: right;"><?php echo $row['id']; ?></div>  
+                        </form><?php
+                    }
+                    else
+                    {
+                        ?><div class="file-header"><?php echo $row['title']; ?><div style="float: right;"><?php echo $row['id']; ?></div></div><?php
+                    }
+                }
+            ?>
                 <div class="file-body">
                     <a href="../homelol/professor-files/<?php echo $row['file'];?>" download="<?php echo $row['file'];?>">
                         <button class="file-title"><?php echo $row['file']; ?></button>
